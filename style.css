@@ -1,0 +1,228 @@
+/* --- GENERAL --- */
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background-color: #1a1623;
+  color: #fff;
+}
+
+/* --- BANNER (con transparencia) --- */
+.banner {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  background-color: #1a1623; /* mismo color que el fondo de la página */
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.2; /* transparencia */
+  transition: opacity 0.3s ease;
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.contenido-principal {
+  display: flex;
+  height: calc(100vh - 180px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  width: 250px;
+  background-color: #18141f;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  height: 100%;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.sidebar li:hover {
+  color: #d3bfff;
+}
+
+/* --- CONTENIDO --- */
+.contenido {
+  flex: 1;
+  padding: 30px;
+  background-color: #1a1623;
+  overflow-y: auto;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* --- BUSCADOR --- */
+.buscador {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.buscador input {
+  width: 60%;
+  max-width: 400px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  background-color: #231e2e;
+  color: #fff;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.buscador input::placeholder {
+  color: #b8b0d0;
+}
+
+.buscador input:hover,
+.buscador input:focus {
+  background-color: #2c2540;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* --- CAMISETAS --- */
+#info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 20px;
+}
+
+#info .camiseta {
+  flex: 1 1 220px;
+  max-width: 250px;
+  background-color: #231e2e;
+  border-radius: 12px;
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+#info .camiseta:hover {
+  transform: scale(1.07);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  background-color: #2c2540;
+}
+
+#info img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+  margin-bottom: 10px;
+  transition: transform 0.25s ease;
+}
+
+#info .camiseta:hover img {
+  transform: scale(1.05);
+}
+
+/* Ocultar equipos */
+.oculto {
+  display: none;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+  .contenido-principal {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .buscador input {
+    width: 80%;
+    font-size: 0.95rem;
+  }
+
+  #info {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  #info .camiseta {
+    flex: 1 1 160px;
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 500px) {
+  .banner {
+    height: 140px;
+  }
+
+  .buscador input {
+    width: 90%;
+  }
+
+  #info {
+    justify-content: center;
+  }
+
+  #info .camiseta {
+    flex: 1 1 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
+/* --- BOTÓN VOLVER --- */
+.btn-volver {
+  background-color: rgba(50, 50, 50, 0.7);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.btn-volver:hover {
+  background-color: rgba(80, 80, 80, 0.9);
+  transform: scale(1.05);
+}
