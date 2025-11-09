@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camisetas del Mundo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- BANNER -->
+  <header class="banner">
+    <img src="img/1000024372.jpg" alt="Banner de camisetas" />
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="contenido-principal">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2>Ligas</h2>
+      <ul>
+        <li class="liga" onclick="toggleLiga('premier')">🇬🇧 Premier League ▸</li>
+        <ul id="premier" class="equipos oculto">
+          <li onclick="mostrarEquipo('liverpool')">Liverpool</li>
+          <li onclick="mostrarEquipo('Manchester United')">Manchester United</li>
+        </ul>
+
+        <li class="liga" onclick="toggleLiga('laliga')">🇪🇸 LaLiga ▸</li>
+        <ul id="laliga" class="equipos oculto">
+          <li onclick="mostrarEquipo('barcelona')">Barcelona</li>
+          <li onclick="mostrarEquipo('Real Madrid')">Real Madrid</li>
+        </ul>
+      </ul>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido">
+      <h1 id="titulo">Selecciona un equipo</h1>
+      <h2 id="titulo">CAMISETAS destacadas</h2>
+      
+      <!-- BOTÓN VOLVER -->
+<button id="btnVolver" class="btn-volver oculto" onclick="mostrarDestacadas()">
+  ⬅ Volver
+</button>
+
+      <!-- BUSCADOR -->
+      <div class="buscador">
+        <input 
+          type="text" 
+          id="buscador" 
+          placeholder="Buscar camiseta..."
+        />
+      </div>
+
+      <!-- CONTENEDOR DE CAMISETAS -->
+      <div id="info">
+        <div class="camiseta">
+          <img src="camisetas/realmadrid.jpg" alt="Real Madrid">
+          <p>Real Madrid 2011/12</p>
+        </div>
+        <div class="camiseta">
+          <img src="camisetas/barcelona2011.jpg" alt="Barcelona">
+          <p>Barcelona 2011</p>
+        </div>
+        <div class="camiseta">
+          <img src="camisetas/liverpool2019.jpg" alt="Liverpool">
+          <p>Liverpool 2019</p>
+        </div>
+        <div class="camiseta">
+          <img src="camisetas/manchesterutd2008.jpg" alt="Manchester United">
+          <p>Manchester United 2008</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+</body>
+</html>
