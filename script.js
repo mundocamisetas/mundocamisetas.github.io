@@ -11,17 +11,17 @@ const todasLasCamisetas = [
   { nombre: "Real Madrid 2001/02", equipo: "Real Madrid", imagen: "camisetas/realmadrid2001.jpeg" },
   { nombre: "Real Madrid 2013/14", equipo: "Real Madrid", imagen: "camisetas/realmadrid2013.webp" },
 
-  { nombre: "Barcelona 2010/11", equipo: "barcelona", imagen: "camisetas/barcelona2011.jpg" },
-  { nombre: "Barcelona 2015/16", equipo: "barcelona", imagen: "camisetas/barcelona2015.jpg" },
-  { nombre: "Barcelona 2008/09", equipo: "barcelona", imagen: "camisetas/barcelona2008-2009.jpeg" },
-  { nombre: "Barcelona 1999/2000", equipo: "barcelona", imagen: "camisetas/barcelona1999.webp" },
+  { nombre: "Barcelona 2010/11", equipo: "Barcelona", imagen: "camisetas/barcelona2011.jpg" },
+  { nombre: "Barcelona 2015/16", equipo: "Barcelona", imagen: "camisetas/barcelona2015.jpg" },
+  { nombre: "Barcelona 2008/09", equipo: "Barcelona", imagen: "camisetas/barcelona2008-2009.jpeg" },
+  { nombre: "Barcelona 1999/2000", equipo: "Barcelona", imagen: "camisetas/barcelona1999.webp" },
 
-  { nombre: "Liverpool 2019/20", equipo: "liverpool", imagen: "camisetas/liverpool2019.jpg" },
-  { nombre: "Liverpool 2004/05", equipo: "liverpool", imagen: "camisetas/liverpool2004.png" },
-  { nombre: "Liverpool 2006/07", equipo: "liverpool", imagen: "camisetas/liverpool2006.jpg" },
-  { nombre: "Liverpool 1983/84", equipo: "liverpool", imagen: "camisetas/liverpool1983.jpg" },
-  { nombre: "Liverpool 1987/88", equipo: "liverpool", imagen: "camisetas/liverpool1987.webp" },
-  { nombre: "Liverpool 2018/19", equipo: "liverpool", imagen: "camisetas/liverpool2018.webp" },
+  { nombre: "Liverpool 2019/20", equipo: "Liverpool", imagen: "camisetas/liverpool2019.jpg" },
+  { nombre: "Liverpool 2004/05", equipo: "Liverpool", imagen: "camisetas/liverpool2004.png" },
+  { nombre: "Liverpool 2006/07", equipo: "Liverpool", imagen: "camisetas/liverpool2006.jpg" },
+  { nombre: "Liverpool 1983/84", equipo: "Liverpool", imagen: "camisetas/liverpool1983.jpg" },
+  { nombre: "Liverpool 1987/88", equipo: "Liverpool", imagen: "camisetas/liverpool1987.webp" },
+  { nombre: "Liverpool 2018/19", equipo: "Liverpool", imagen: "camisetas/liverpool2018.webp" },
   
   { nombre: "Manchester United 2008", equipo: "Manchester United", imagen: "camisetas/manchesterutd2008.jpg" },
   { nombre: "Manchester United 1992", equipo: "Manchester United", imagen: "camisetas/manchesterutd1992.webp" },
@@ -54,7 +54,11 @@ function mostrarEquipo(equipo) {
   btnVolver.classList.remove("oculto");
 
   // Limpiar buscador al seleccionar equipo
-  document.getElementById("buscador").value = "";
+  const buscador = document.getElementById("buscador");
+  if (buscador) buscador.value = "";
+
+  // Asignar clics para abrir detalle
+  asignarEventosCamisetas();
 }
 
 // --- VOLVER A CAMISETAS DESTACADAS ---
@@ -62,40 +66,44 @@ function mostrarDestacadas() {
   info.innerHTML = camisetasDestacadasHTML;
   titulo.textContent = "Camisetas destacadas";
   btnVolver.classList.add("oculto");
+  asignarEventosCamisetas();
 }
 
 // --- BUSCADOR GLOBAL ---
 document.addEventListener("DOMContentLoaded", () => {
   const buscador = document.getElementById("buscador");
 
-  buscador.addEventListener("input", () => {
-    const texto = buscador.value.toLowerCase().trim();
+  if (buscador) {
+    buscador.addEventListener("input", () => {
+      const texto = buscador.value.toLowerCase().trim();
 
-    if (texto === "") {
-      mostrarDestacadas();
-      return;
-    }
+      if (texto === "") {
+        mostrarDestacadas();
+        return;
+      }
 
-    const resultados = todasLasCamisetas.filter(c =>
-      c.nombre.toLowerCase().includes(texto)
-    );
+      const resultados = todasLasCamisetas.filter(c =>
+        c.nombre.toLowerCase().includes(texto)
+      );
 
-    if (resultados.length === 0) {
-      info.innerHTML = `<p style="text-align:center;">No se encontraron resultados.</p>`;
-      return;
-    }
+      if (resultados.length === 0) {
+        info.innerHTML = `<p style="text-align:center;">No se encontraron resultados.</p>`;
+        return;
+      }
 
-    titulo.textContent = "Resultados de búsqueda";
+      titulo.textContent = "Resultados de búsqueda";
 
-    info.innerHTML = resultados.map(c => `
-      <div class="camiseta">
-        <img src="${c.imagen}" alt="${c.nombre}">
-        <p>${c.nombre}</p>
-      </div>
-    `).join("");
+      info.innerHTML = resultados.map(c => `
+        <div class="camiseta">
+          <img src="${c.imagen}" alt="${c.nombre}">
+          <p>${c.nombre}</p>
+        </div>
+      `).join("");
 
-    btnVolver.classList.add("oculto");
-  });
+      btnVolver.classList.add("oculto");
+      asignarEventosCamisetas();
+    });
+  }
 });
 
 // --- FUNCIÓN PARA ABRIR DETALLE ---
@@ -104,22 +112,36 @@ function abrirDetalleCamiseta(camiseta) {
   window.location.href = "detalle.html";
 }
 
-// --- DELEGACIÓN DE EVENTOS (funciona para TODAS las camisetas) ---
-document.addEventListener("click", e => {
-  const camisetaDiv = e.target.closest(".camiseta");
-  if (!camisetaDiv) return;
+// --- APLICAR CLIC AUTOMÁTICAMENTE A TODAS LAS CAMISETAS ---
+function asignarEventosCamisetas() {
+  const camisetas = document.querySelectorAll(".camiseta");
 
-  const img = camisetaDiv.querySelector("img");
-  const nombre = camisetaDiv.querySelector("p")?.textContent || "Camiseta";
-  const equipo = img?.alt || "Desconocido";
-  const imagen = img?.src || "";
+  camisetas.forEach(camiseta => {
+    const img = camiseta.querySelector("img");
+    const nombre = camiseta.querySelector("p")?.textContent || "Camiseta";
+    const equipo = img?.alt || "Desconocido";
+    const imagen = img?.src || "";
 
-  abrirDetalleCamiseta({
-    nombre,
-    equipo,
-    imagen,
-    temporada: nombre.match(/\d{4}/g)?.join("/") || "Desconocida",
-    marca: "Por definir",
-    tipo: "Titular"
+    camiseta.addEventListener("click", () => {
+      abrirDetalleCamiseta({
+        nombre,
+        equipo,
+        imagen,
+        temporada: nombre.match(/\d{4}/g)?.join("/") || "Desconocida",
+        marca: "Por definir",
+        tipo: "Titular"
+      });
+    });
   });
+}
+
+// --- DETECTAR SI SE SELECCIONÓ UN EQUIPO DESDE OTRA PÁGINA ---
+document.addEventListener("DOMContentLoaded", () => {
+  const equipoSeleccionado = sessionStorage.getItem("equipoSeleccionado");
+  if (equipoSeleccionado) {
+    mostrarEquipo(equipoSeleccionado);
+    sessionStorage.removeItem("equipoSeleccionado");
+  } else {
+    asignarEventosCamisetas();
+  }
 });
