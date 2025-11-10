@@ -21,6 +21,7 @@ const todasLasCamisetas = [
   { nombre: "Liverpool 2006/07", equipo: "liverpool", imagen: "camisetas/liverpool2006.jpg" },
   { nombre: "Liverpool 1983/84", equipo: "liverpool", imagen: "camisetas/liverpool1983.jpg" },
   { nombre: "Liverpool 1987/88", equipo: "liverpool", imagen: "camisetas/liverpool1987.webp" },
+  { nombre: "Liverpool 2018/19", equipo: "liverpool", imagen: "camisetas/liverpool2018.webp" },
   
   { nombre: "Manchester United 2008", equipo: "Manchester United", imagen: "camisetas/manchesterutd2008.jpg" },
   { nombre: "Manchester United 1992", equipo: "Manchester United", imagen: "camisetas/manchesterutd1992.webp" },
