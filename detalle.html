@@ -4,200 +4,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Detalle de Camiseta</title>
-  <link rel="stylesheet" href="estilos.css" />
-  <style>
-    body {
-      background-color: #120f1f;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
-
-    /* --- BANNER SUPERIOR --- */
-    .banner {
-      background: rgba(255, 255, 255, 0.08);
-      text-align: center;
-      padding: 15px 0;
-      font-size: 28px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: white;
-      backdrop-filter: blur(6px);
-    }
-
-    /* --- SIDEBAR (LADO IZQUIERDO) --- */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 80px;
-      height: 100vh;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(6px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 80px;
-      gap: 25px;
-    }
-
-    .sidebar button {
-      background: transparent;
-      border: none;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-      transition: transform 0.2s;
-    }
-
-    .sidebar button:hover {
-      transform: scale(1.1);
-      color: #bdafff;
-    }
-
-    /* --- CONTENEDOR DEL DETALLE --- */
-    .contenedor-detalle {
-      margin-left: 120px; /* deja espacio para sidebar */
-      margin-top: 40px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      min-height: 80vh;
-      gap: 60px;
-      padding: 40px;
-    }
-
-    .detalle-imagen img {
-      width: 600px;
-      max-width: 90vw;
-      border-radius: 20px;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
-      transition: transform 0.3s ease;
-    }
-
-    .detalle-imagen img:hover {
-      transform: scale(1.03);
-    }
-
-    /* --- INFO RECTANGULAR --- */
-    .detalle-info {
-      flex: 1;
-      max-width: 500px;
-      padding: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-    }
-
-    .detalle-info h2 {
-      font-size: 30px;
-      margin-bottom: 20px;
-      text-align: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-      padding-bottom: 10px;
-    }
-
-    .detalle-item {
-      padding: 15px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-      font-size: 18px;
-    }
-
-    .detalle-item:last-child {
-      border-bottom: none;
-    }
-
-    /* --- BOTÓN VOLVER --- */
-    .volver {
-      display: block;
-      margin: 40px auto;
-      padding: 14px 35px;
-      background: transparent;
-      border: 1px solid white;
-      color: white;
-      text-transform: uppercase;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 16px;
-    }
-
-    .volver:hover {
-      background: white;
-      color: #120f1f;
-    }
-
-    /* --- RESPONSIVE --- */
-    @media (max-width: 900px) {
-      .sidebar {
-        display: none;
-      }
-
-      .contenedor-detalle {
-        margin-left: 0;
-        flex-direction: column;
-        gap: 40px;
-        padding: 20px;
-      }
-
-      .detalle-imagen img {
-        width: 90vw;
-      }
-
-      .detalle-info {
-        width: 90%;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- BANNER PRINCIPAL -->
-  <div class="banner">Colección de Camisetas</div>
+  <!-- BANNER -->
+  <header class="banner">
+    <img src="img/1000024372.jpg" alt="Banner de camisetas" />
+  </header>
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <button onclick="window.location.href='index.html'">🏠</button>
-    <button onclick="window.location.href='index.html#destacadas'">⭐</button>
-    <button onclick="window.location.href='index.html#buscar'">🔍</button>
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="contenido-principal">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2>Ligas</h2>
+      <ul>
+        <li class="liga" onclick="toggleLiga('premier')">🇬🇧 Premier League ▸</li>
+        <ul id="premier" class="equipos oculto">
+          <li onclick="mostrarEquipo('liverpool')">Liverpool</li>
+          <li onclick="mostrarEquipo('Manchester United')">Manchester United</li>
+        </ul>
+
+        <li class="liga" onclick="toggleLiga('laliga')">🇪🇸 LaLiga ▸</li>
+        <ul id="laliga" class="equipos oculto">
+          <li onclick="mostrarEquipo('barcelona')">Barcelona</li>
+          <li onclick="mostrarEquipo('Real Madrid')">Real Madrid</li>
+        </ul>
+      </ul>
+    </aside>
+
+    <!-- CONTENIDO DE DETALLE -->
+    <main class="contenido detalle-contenido">
+      <button class="btn-volver" onclick="window.location.href='index.html'">⬅ Volver</button>
+      <div id="detalle-camiseta" class="detalle-camiseta"></div>
+    </main>
   </div>
 
-  <!-- CONTENIDO DETALLE -->
-  <div class="contenedor-detalle">
-    <div class="detalle-imagen">
-      <img id="detalleImagen" src="" alt="Camiseta">
-    </div>
-
-    <div class="detalle-info">
-      <h2 id="detalleNombre">Nombre de la camiseta</h2>
-      <div class="detalle-item"><strong>Equipo:</strong> <span id="detalleEquipo"></span></div>
-      <div class="detalle-item"><strong>Temporada:</strong> <span id="detalleTemporada"></span></div>
-      <div class="detalle-item"><strong>Marca:</strong> <span id="detalleMarca"></span></div>
-      <div class="detalle-item"><strong>Tipo:</strong> <span id="detalleTipo"></span></div>
-    </div>
-  </div>
-
-  <!-- BOTÓN VOLVER A LA PRINCIPAL -->
-  <button class="volver" onclick="window.location.href='index.html'">← Volver a la página principal</button>
-
-  <!-- SCRIPT PARA CARGAR DETALLES -->
   <script>
+    // Cargar datos de la camiseta desde sessionStorage
     const camiseta = JSON.parse(sessionStorage.getItem("camisetaSeleccionada"));
+    const contenedor = document.getElementById("detalle-camiseta");
 
     if (camiseta) {
-      document.getElementById("detalleImagen").src = camiseta.imagen;
-      document.getElementById("detalleNombre").textContent = camiseta.nombre;
-      document.getElementById("detalleEquipo").textContent = camiseta.equipo;
-      document.getElementById("detalleTemporada").textContent = camiseta.temporada;
-      document.getElementById("detalleMarca").textContent = camiseta.marca;
-      document.getElementById("detalleTipo").textContent = camiseta.tipo;
+      contenedor.innerHTML = `
+        <div class="detalle-imagen">
+          <img src="${camiseta.imagen}" alt="${camiseta.nombre}">
+        </div>
+        <div class="detalle-info">
+          <h1>${camiseta.nombre}</h1>
+          <p><strong>Equipo:</strong> ${camiseta.equipo}</p>
+          <hr>
+          <p><strong>Temporada:</strong> ${camiseta.temporada}</p>
+          <hr>
+          <p><strong>Marca:</strong> ${camiseta.marca}</p>
+          <hr>
+          <p><strong>Tipo:</strong> ${camiseta.tipo}</p>
+        </div>
+      `;
     } else {
-      document.body.innerHTML = "<p style='text-align:center;margin-top:50px;'>No se encontró información de la camiseta.</p>";
+      contenedor.innerHTML = `<p>No se encontraron detalles de la camiseta.</p>`;
     }
+
+    // Función dummy para evitar errores del sidebar
+    function toggleLiga() {}
+    function mostrarEquipo() {}
   </script>
 </body>
 </html>
