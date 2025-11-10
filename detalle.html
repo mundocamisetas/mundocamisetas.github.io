@@ -13,6 +13,9 @@
     <img src="img/1000024372.jpg" alt="Banner de camisetas" />
   </header>
 
+  <!-- BOTÓN VOLVER -->
+  <button class="btn-volver" onclick="window.location.href='index.html'">⬅ Volver</button>
+
   <!-- CONTENIDO PRINCIPAL -->
   <div class="contenido-principal">
     <!-- SIDEBAR -->
@@ -21,27 +24,32 @@
       <ul>
         <li class="liga" onclick="toggleLiga('premier')">🇬🇧 Premier League ▸</li>
         <ul id="premier" class="equipos oculto">
-          <li onclick="mostrarEquipo('liverpool')">Liverpool</li>
-          <li onclick="mostrarEquipo('Manchester United')">Manchester United</li>
+          <li>Liverpool</li>
+          <li>Manchester United</li>
         </ul>
 
         <li class="liga" onclick="toggleLiga('laliga')">🇪🇸 LaLiga ▸</li>
         <ul id="laliga" class="equipos oculto">
-          <li onclick="mostrarEquipo('barcelona')">Barcelona</li>
-          <li onclick="mostrarEquipo('Real Madrid')">Real Madrid</li>
+          <li>Barcelona</li>
+          <li>Real Madrid</li>
         </ul>
       </ul>
     </aside>
 
     <!-- CONTENIDO DE DETALLE -->
     <main class="contenido detalle-contenido">
-      <button class="btn-volver" onclick="window.location.href='index.html'">⬅ Volver</button>
       <div id="detalle-camiseta" class="detalle-camiseta"></div>
     </main>
   </div>
 
   <script>
-    // Cargar datos de la camiseta desde sessionStorage
+    // --- FUNCIONES DE LAS LIGAS ---
+    function toggleLiga(id) {
+      const liga = document.getElementById(id);
+      liga.classList.toggle("oculto");
+    }
+
+    // --- CARGAR DETALLES DE CAMISETA ---
     const camiseta = JSON.parse(sessionStorage.getItem("camisetaSeleccionada"));
     const contenedor = document.getElementById("detalle-camiseta");
 
@@ -64,10 +72,6 @@
     } else {
       contenedor.innerHTML = `<p>No se encontraron detalles de la camiseta.</p>`;
     }
-
-    // Función dummy para evitar errores del sidebar
-    function toggleLiga() {}
-    function mostrarEquipo() {}
   </script>
 </body>
 </html>
