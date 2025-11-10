@@ -8,72 +8,119 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      background-color: #1a1623;
-      color: white;
+      background-color: #16111d;
+      color: #e2e2e2;
       font-family: "Poppins", sans-serif;
-    }
-
-    .detalle-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 40px;
-      padding: 50px;
-    }
-
-    .detalle-img {
-      flex: 1 1 350px;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    .detalle-img img {
-      width: 100%;
-      border-radius: 12px;
-      background-color: #231e2e;
-      padding: 10px;
-    }
-
-    .detalle-info {
-      flex: 1 1 350px;
-      max-width: 450px;
-      background-color: #231e2e;
-      padding: 25px;
-      border-radius: 12px;
-    }
-
-    .detalle-info h1 {
-      margin-top: 0;
-      font-size: 1.8rem;
-      color: #d3bfff;
-    }
-
-    .detalle-info p {
-      margin: 10px 0;
-      line-height: 1.5;
+      margin: 0;
+      padding: 0;
     }
 
     .btn-volver {
       display: inline-block;
-      background-color: #372b4b;
-      color: white;
+      background-color: #2d2437;
+      color: #e0d1f4;
       border: none;
-      border-radius: 10px;
-      padding: 10px 20px;
-      cursor: pointer;
+      border-radius: 8px;
+      padding: 8px 18px;
       margin: 20px;
       text-decoration: none;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+    .btn-volver:hover {
+      background-color: #3b2f4d;
     }
 
-    .btn-volver:hover {
-      background-color: #4c3a68;
-      transform: scale(1.05);
+    .detalle-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 60px;
+      padding: 40px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* Imagen de la camiseta */
+    .detalle-img {
+      flex: 1 1 400px;
+      max-width: 450px;
+      text-align: center;
+    }
+    .detalle-img img {
+      width: 100%;
+      border-radius: 12px;
+      background-color: #1e1927;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Panel de información */
+    .detalle-info {
+      flex: 1 1 400px;
+      max-width: 450px;
+      background-color: #1e1927;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .detalle-info h1 {
+      font-size: 1.8rem;
+      color: #d6c3ff;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .detalle-info p {
+      margin: 10px 0;
+      line-height: 1.6;
+      border-bottom: 1px solid #2e2640;
+      padding-bottom: 8px;
+    }
+
+    .detalle-info strong {
+      color: #c9a9ff;
+    }
+
+    @media (max-width: 850px) {
+      .detalle-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .detalle-img, .detalle-info {
+        max-width: 90%;
+      }
     }
   </style>
 </head>
 <body>
   <a href="index.html" class="btn-volver">⬅ Volver</a>
 
-  <div class=
+  <div class="detalle-container">
+    <div class="detalle-img">
+      <img id="detalle-imagen" src="" alt="">
+    </div>
+    <div class="detalle-info">
+      <h1 id="detalle-nombre"></h1>
+      <p><strong>Equipo:</strong> <span id="detalle-equipo"></span></p>
+      <p><strong>Temporada:</strong> <span id="detalle-temporada"></span></p>
+      <p><strong>Marca:</strong> <span id="detalle-marca"></span></p>
+      <p><strong>Tipo:</strong> <span id="detalle-tipo"></span></p>
+    </div>
+  </div>
+
+  <script>
+    const camiseta = JSON.parse(sessionStorage.getItem("camisetaSeleccionada"));
+    if (camiseta) {
+      document.getElementById("detalle-imagen").src = camiseta.imagen;
+      document.getElementById("detalle-nombre").textContent = camiseta.nombre;
+      document.getElementById("detalle-equipo").textContent = camiseta.equipo;
+      document.getElementById("detalle-temporada").textContent = camiseta.temporada || "Desconocida";
+      document.getElementById("detalle-marca").textContent = camiseta.marca || "Sin marca";
+      document.getElementById("detalle-tipo").textContent = camiseta.tipo || "Titular";
+    }
+  </script>
+</body>
+</html>
