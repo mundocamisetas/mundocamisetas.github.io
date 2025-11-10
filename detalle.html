@@ -24,14 +24,14 @@
       <ul>
         <li class="liga" onclick="toggleLiga('premier')">🇬🇧 Premier League ▸</li>
         <ul id="premier" class="equipos oculto">
-          <li>Liverpool</li>
-          <li>Manchester United</li>
+          <li onclick="redirigirEquipo('liverpool')">Liverpool</li>
+          <li onclick="redirigirEquipo('Manchester United')">Manchester United</li>
         </ul>
 
         <li class="liga" onclick="toggleLiga('laliga')">🇪🇸 LaLiga ▸</li>
         <ul id="laliga" class="equipos oculto">
-          <li>Barcelona</li>
-          <li>Real Madrid</li>
+          <li onclick="redirigirEquipo('barcelona')">Barcelona</li>
+          <li onclick="redirigirEquipo('Real Madrid')">Real Madrid</li>
         </ul>
       </ul>
     </aside>
@@ -43,10 +43,16 @@
   </div>
 
   <script>
-    // --- FUNCIONES DE LAS LIGAS ---
+    // --- FUNCIONES DE LIGAS ---
     function toggleLiga(id) {
       const liga = document.getElementById(id);
       liga.classList.toggle("oculto");
+    }
+
+    // --- REDIRECCIÓN A EQUIPOS ---
+    function redirigirEquipo(equipo) {
+      sessionStorage.setItem("equipoSeleccionado", equipo);
+      window.location.href = "index.html";
     }
 
     // --- CARGAR DETALLES DE CAMISETA ---
