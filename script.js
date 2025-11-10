@@ -100,3 +100,31 @@ document.addEventListener("DOMContentLoaded", () => {
     btnVolver.classList.add("oculto");
   });
 });
+// --- FUNCIÓN PARA ABRIR DETALLE ---
+function abrirDetalleCamiseta(camiseta) {
+  sessionStorage.setItem("camisetaSeleccionada", JSON.stringify(camiseta));
+  window.location.href = "detalle.html";
+}
+
+// --- APLICAR CLIC AUTOMÁTICAMENTE A TODAS LAS CAMISETAS ---
+document.addEventListener("DOMContentLoaded", () => {
+  const camisetas = document.querySelectorAll(".camiseta");
+
+  camisetas.forEach(camiseta => {
+    const img = camiseta.querySelector("img");
+    const nombre = camiseta.querySelector("p")?.textContent || "Camiseta";
+    const equipo = img?.alt || "Desconocido";
+    const imagen = img?.src || "";
+
+    camiseta.addEventListener("click", () => {
+      abrirDetalleCamiseta({
+        nombre,
+        equipo,
+        imagen,
+        temporada: nombre.match(/\d{4}/g)?.join("/") || "Desconocida",
+        marca: "Por definir",
+        tipo: "Titular"
+      });
+    });
+  });
+});
