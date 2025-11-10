@@ -241,14 +241,14 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 50px;
-  background: none; /* sin fondo adicional */
+  background: none;
   color: #fff;
   border-radius: 12px;
   max-width: 1000px;
 }
 
 .detalle-imagen img {
-  width: 420px;
+  width: 520px;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 0 25px rgba(0,0,0,0.5);
@@ -261,13 +261,13 @@ html, body {
 
 .detalle-info {
   flex: 1;
-  min-width: 300px;
-  font-size: 1.1rem;
+  min-width: 350px;
+  font-size: 1.2rem;
   line-height: 1.6;
 }
 
 .detalle-info h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 15px;
 }
 
@@ -281,9 +281,12 @@ html, body {
   margin: 10px 0;
 }
 
-/* Botón volver */
+/* Botón volver fijo */
 .btn-volver {
-  display: inline-block;
+  position: fixed;
+  top: 15px;
+  left: 20px;
+  z-index: 1000;
   background-color: #2c2540;
   color: #fff;
   border: none;
@@ -291,7 +294,6 @@ html, body {
   padding: 10px 18px;
   font-size: 1rem;
   cursor: pointer;
-  margin-bottom: 20px;
   transition: all 0.3s ease;
 }
 
@@ -299,4 +301,3 @@ html, body {
   background-color: #3a3160;
   transform: scale(1.05);
 }
-
